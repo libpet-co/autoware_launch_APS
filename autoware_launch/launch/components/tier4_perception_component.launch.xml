@@ -25,8 +25,8 @@
     </include>
   </group>
 
-  <arg name="use_empty_dynamic_object_publisher" default="false" description="if true, /perception/object_recognition/objects topic has an empty DynamicObjectArray"/>
-  <arg name="use_traffic_light_recognition" default="true" description="use traffic light recognition module, if false, traffic light recognition module will not be launched"/>
+  <arg name="use_empty_dynamic_object_publisher" default="true" description="if true, /perception/object_recognition/objects topic has an empty DynamicObjectArray"/>
+  <arg name="use_traffic_light_recognition" default="false" description="use traffic light recognition module, if false, traffic light recognition module will not be launched"/>
 
   <arg name="use_low_height_cropbox" default="false" description="use low height crop filter in clustering"/>
   <arg name="use_vector_map" default="true" description="use vector map in prediction"/>
@@ -47,7 +47,7 @@
   <arg name="detected_objects_filter_method" default="lanelet_filter" description="options: lanelet_filter, position_filter"/>
   <arg name="detected_objects_validation_method" default="obstacle_pointcloud" description="options: obstacle_pointcloud, occupancy_grid (must be used with laserscan_based_occupancy_grid_map)"/>
   <arg name="data_path" default="$(env HOME)/autoware_data" description="packages data and artifacts directory path"/>
-  <arg name="lidar_detection_model" default="centerpoint" description="If the model name is not declared, the default model in perception.launch.xml will be used"/>
+  <arg name="lidar_detection_model" default="clustering" description="If the model name is not declared, the default model in perception.launch.xml will be used"/>
 
   <arg name="traffic_light_recognition/camera_namespaces" default="[camera6, camera7]" description="choose camera which use for traffic light recognition"/>
   <arg name="traffic_light_recognition/use_high_accuracy_detection" default="true" description="select whether to use high accuracy detector for traffic light recognition"/>
@@ -60,7 +60,7 @@
   <include file="$(find-pkg-share tier4_perception_launch)/launch/perception.launch.xml">
     <arg name="data_path" value="$(var data_path)"/>
     <!-- general options to switch launch function/module -->
-    <arg name="mode" value="$(var perception_mode)"/>
+    <arg name="mode" value="lidar"/>
     <arg name="lidar_detection_model" value="$(var lidar_detection_model)"/>
     <arg name="vehicle_param_file" value="$(find-pkg-share $(var vehicle_model)_description)/config/vehicle_info.param.yaml"/>
 

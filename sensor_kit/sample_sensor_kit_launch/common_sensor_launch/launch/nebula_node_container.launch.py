@@ -204,7 +204,7 @@ def launch_setup(context, *args, **kwargs):
             name="distortion_corrector_node",
             remappings=[
                 ("~/input/twist", "/sensing/vehicle_velocity_converter/twist_with_covariance"),
-                ("~/input/imu", "/sensing/imu/imu_data"),
+                ("~/input/imu", "/sensors/imu/data"),
                 ("~/input/pointcloud", "mirror_cropped/pointcloud_ex"),
                 ("~/output/pointcloud", "rectified/pointcloud_ex"),
             ],

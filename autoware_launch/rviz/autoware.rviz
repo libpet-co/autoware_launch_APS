@@ -4,11 +4,12 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
+        - /System1/Vehicle1
+        - /Map1/Lanelet2VectorMap1/Topic1
         - /Sensing1/LiDAR1/ConcatenatePointCloud1/Autocompute Value Bounds1
-        - /Localization1
-        - /Planning1
         - /Planning1/MissionPlanning1
         - /Odometry1/Shape1
+        - /PointCloud21/Topic1
       Splitter Ratio: 0.557669460773468
     Tree Height: 230
   - Class: rviz_common/Selection
@@ -65,7 +66,7 @@ Visualization Manager:
           Value: false
         - Class: rviz_common/Group
           Displays:
-            - Alpha: 0.30000001192092896
+            - Alpha: 0.5
               Class: rviz_default_plugins/RobotModel
               Collision Enabled: false
               Description File: ""
@@ -88,25 +89,25 @@ Visualization Manager:
                   Show Axes: false
                   Show Trail: false
                   Value: true
+                imu_link:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                  Value: true
+                rslidar:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                  Value: true
+                rslidar_base_link:
+                  Alpha: 1
+                  Show Axes: false
+                  Show Trail: false
+                  Value: true
                 sensor_kit_base_link:
                   Alpha: 1
                   Show Axes: false
                   Show Trail: false
-                tamagawa/imu_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                velodyne_top:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                velodyne_top_base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Mass Properties:
                 Inertia: false
                 Mass: false
@@ -118,7 +119,7 @@ Visualization Manager:
             - Class: rviz_plugins/PolarGridDisplay
               Color: 255; 255; 255
               Delta Range: 10
-              Enabled: true
+              Enabled: false
               Max Alpha: 0.5
               Max Range: 100
               Max Wave Alpha: 0.5
@@ -126,7 +127,7 @@ Visualization Manager:
               Min Wave Alpha: 0.009999999776482582
               Name: PolarGridDisplay
               Reference Frame: base_link
-              Value: true
+              Value: false
               Wave Color: 255; 255; 255
               Wave Velocity: 40
             - Background Alpha: 0.5
@@ -212,37 +213,13 @@ Visualization Manager:
           Enabled: true
           Name: Lanelet2VectorMap
           Namespaces:
-            center_lane_line: false
-            center_line_arrows: false
-            crosswalk_lanelet_id: true
-            crosswalk_lanelets: true
-            detection_area: true
-            detection_area_stopline: true
-            lane_start_bound: false
-            lanelet direction: true
-            lanelet_id: false
+            center_lane_line: true
+            center_line_arrows: true
+            lane_start_bound: true
+            lanelet_id: true
             left_lane_bound: true
-            no_stopping_area: true
-            no_stopping_area_stopline: true
-            parking_lots: true
-            parking_space: true
-            partitions: true
-            pedestrian_line_marking: true
-            pedestrian_polygon_marking: true
             right_lane_bound: true
             road_lanelets: false
-            shoulder_center_lane_line: false
-            shoulder_center_line_arrows: true
-            shoulder_lane_start_bound: true
-            shoulder_left_lane_bound: true
-            shoulder_right_lane_bound: true
-            shoulder_road_lanelets: false
-            stop_lines: true
-            traffic_light: true
-            traffic_light_id: false
-            traffic_light_reg_elem_id: false
-            traffic_light_triangle: true
-            walkway_lanelets: true
           Topic:
             Depth: 5
             Durability Policy: Transient Local
@@ -1002,10 +979,10 @@ Visualization Manager:
                 Alpha: 1
                 Color: 230; 230; 50
                 Offset from BaseLink: 0
-                Rear Overhang: 1.100000023841858
+                Rear Overhang: 0.10000000149011612
                 Value: false
-                Vehicle Length: 4.889999866485596
-                Vehicle Width: 1.8960000276565552
+                Vehicle Length: 1.8899999856948853
+                Vehicle Width: 0.6000000238418579
               View Path:
                 Alpha: 0.9990000128746033
                 Constant Width: false
@@ -1061,10 +1038,10 @@ Visualization Manager:
                         Alpha: 1
                         Color: 230; 230; 50
                         Offset from BaseLink: 0
-                        Rear Overhang: 1.100000023841858
+                        Rear Overhang: 0.10000000149011612
                         Value: false
-                        Vehicle Length: 4.889999866485596
-                        Vehicle Width: 1.8960000276565552
+                        Vehicle Length: 1.8899999856948853
+                        Vehicle Width: 0.6000000238418579
                       View Path:
                         Alpha: 0.4000000059604645
                         Constant Width: false
@@ -1425,10 +1402,10 @@ Visualization Manager:
                         Alpha: 1
                         Color: 230; 230; 50
                         Offset from BaseLink: 0
-                        Rear Overhang: 1.100000023841858
+                        Rear Overhang: 0.10000000149011612
                         Value: false
-                        Vehicle Length: 4.889999866485596
-                        Vehicle Width: 1.8960000276565552
+                        Vehicle Length: 1.8899999856948853
+                        Vehicle Width: 0.6000000238418579
                       View Path:
                         Alpha: 0.30000001192092896
                         Constant Width: false
@@ -1529,10 +1506,10 @@ Visualization Manager:
                         Alpha: 1
                         Color: 230; 230; 50
                         Offset from BaseLink: 0
-                        Rear Overhang: 1.100000023841858
+                        Rear Overhang: 0.10000000149011612
                         Value: false
-                        Vehicle Length: 4.889999866485596
-                        Vehicle Width: 1.8960000276565552
+                        Vehicle Length: 1.8899999856948853
+                        Vehicle Width: 0.6000000238418579
                       View Path:
                         Alpha: 0.30000001192092896
                         Constant Width: false
@@ -1581,10 +1558,10 @@ Visualization Manager:
                         Alpha: 1
                         Color: 230; 230; 50
                         Offset from BaseLink: 0
-                        Rear Overhang: 1.100000023841858
+                        Rear Overhang: 0.10000000149011612
                         Value: false
-                        Vehicle Length: 4.889999866485596
-                        Vehicle Width: 1.8960000276565552
+                        Vehicle Length: 1.8899999856948853
+                        Vehicle Width: 0.6000000238418579
                       View Path:
                         Alpha: 0.30000001192092896
                         Constant Width: false
@@ -1737,10 +1714,10 @@ Visualization Manager:
                         Alpha: 1
                         Color: 230; 230; 50
                         Offset from BaseLink: 0
-                        Rear Overhang: 1.100000023841858
+                        Rear Overhang: 0.10000000149011612
                         Value: false
-                        Vehicle Length: 4.889999866485596
-                        Vehicle Width: 1.8960000276565552
+                        Vehicle Length: 1.8899999856948853
+                        Vehicle Width: 0.6000000238418579
                       View Path:
                         Alpha: 0.30000001192092896
                         Constant Width: false
@@ -1789,10 +1766,10 @@ Visualization Manager:
                         Alpha: 1
                         Color: 230; 230; 50
                         Offset from BaseLink: 0
-                        Rear Overhang: 1.100000023841858
+                        Rear Overhang: 0.10000000149011612
                         Value: false
-                        Vehicle Length: 4.889999866485596
-                        Vehicle Width: 1.8960000276565552
+                        Vehicle Length: 1.8899999856948853
+                        Vehicle Width: 0.6000000238418579
                       View Path:
                         Alpha: 0.30000001192092896
                         Constant Width: false
@@ -1841,10 +1818,10 @@ Visualization Manager:
                         Alpha: 1
                         Color: 230; 230; 50
                         Offset from BaseLink: 0
-                        Rear Overhang: 1.100000023841858
+                        Rear Overhang: 0.10000000149011612
                         Value: false
-                        Vehicle Length: 4.889999866485596
-                        Vehicle Width: 1.8960000276565552
+                        Vehicle Length: 1.8899999856948853
+                        Vehicle Width: 0.6000000238418579
                       View Path:
                         Alpha: 0.30000001192092896
                         Constant Width: false
@@ -3098,10 +3075,10 @@ Visualization Manager:
             Alpha: 1
             Color: 230; 230; 50
             Offset from BaseLink: 0
-            Rear Overhang: 1.100000023841858
+            Rear Overhang: 0.10000000149011612
             Value: false
-            Vehicle Length: 4.889999866485596
-            Vehicle Width: 1.8960000276565552
+            Vehicle Length: 1.8899999856948853
+            Vehicle Width: 0.6000000238418579
           View Path:
             Alpha: 1
             Constant Width: true
@@ -3200,7 +3177,8 @@ Visualization Manager:
               Enabled: true
               Name: VirtualWall (velocity control)
               Namespaces:
-                {}
+                stop_factor_text: true
+                stop_virtual_wall: true
               Topic:
                 Depth: 5
                 Durability Policy: Volatile
@@ -3503,6 +3481,7 @@ Visualization Manager:
                     ScenarioTrajectory: true
                     Value: true
                   Value: false
+                PointCloud2: true
                 Sensing:
                   GNSS:
                     PoseWithCovariance: true
@@ -4618,6 +4597,40 @@ Visualization Manager:
         Reliability Policy: Reliable
         Value: /localization/kinematic_state
       Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz_default_plugins/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: ""
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: PointCloud2
+      Position Transformer: ""
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 1
+      Style: Flat Squares
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /perception/obstacle_segmentation/range_cropped/pointcloud
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 15; 20; 23
@@ -4715,21 +4728,26 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: 0
-      Class: rviz_default_plugins/TopDownOrtho
+      Class: rviz_default_plugins/Orbit
+      Distance: 14.277149200439453
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
+      Focal Point:
+        X: -1.4340944290161133
+        Y: 13.615029335021973
+        Z: -1.2664185762405396
+      Focal Shape Fixed Size: true
+      Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 11.804902076721191
+      Pitch: 1.4847966432571411
       Target Frame: viewer
-      Value: TopDownOrtho (rviz_default_plugins)
-      X: 10.812600135803223
-      Y: 39.05136489868164
+      Value: Orbit (rviz_default_plugins)
+      Yaw: 4.6723952293396
     Saved:
       - Class: rviz_default_plugins/ThirdPersonFollower
         Distance: 18

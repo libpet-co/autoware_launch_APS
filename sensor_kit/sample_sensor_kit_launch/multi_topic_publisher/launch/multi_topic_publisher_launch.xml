@@ -1,0 +1,8 @@
+<launch>
+  <node
+    pkg="multi_topic_publisher"
+    exec="multi_topic_publisher_node"
+    name="multi_topic_publisher"
+    output="screen"
+  />
+</launch>
