@@ -7,8 +7,6 @@ from autoware_perception_msgs.msg import TrafficLightGroupArray  # 修改为 Tra
 from sensor_msgs.msg import PointCloud2, PointField
 from std_msgs.msg import Header  # 添加导入 Header
 import struct  # 添加 struct 用于打包点云数据
-from autoware_vehicle_msgs.msg import ControlModeReport  # 新增导入 ControlModeReport
-from geometry_msgs.msg import TwistWithCovarianceStamped  # 新增导入 TwistWithCovarianceStamped
 
 class MultiTopicPublisher(Node):
     def __init__(self):
@@ -37,14 +35,8 @@ class MultiTopicPublisher(Node):
         self.pointcloud_publisher = self.create_publisher(
             PointCloud2, '/perception/obstacle_segmentation/pointcloud', qos_profile_best  # 修改为 best effort QoS
         )
-        self.control_mode_publisher = self.create_publisher(
-            ControlModeReport, '/vehicle/status/control_mode', qos_profile_reliable  # 新增控制模式发布器
-        )
-        self.twist_publisher = self.create_publisher(
-            TwistWithCovarianceStamped, '/localization/twist_estimator/twist_with_covariance_lhl_simulator', qos_profile_reliable  # 新增 twist 发布器
-        )
 
-        # 定时器分别发布六个消息
+        # 定时器分别发布四个消息
         self.timer = self.create_timer(0.1, self.publish_messages)
         #self.get_logger().info("MultiTopicPublisher node has started with reliable QoS.")
 
@@ -53,8 +45,6 @@ class MultiTopicPublisher(Node):
         self.publish_occupancy_grid()
         self.publish_traffic_signals()
         self.publish_pointcloud()
-        self.publish_control_mode()  # 新增发布方法
-        self.publish_twist()  # 新增 twist 发布方法
 
     def publish_predicted_objects(self):
         predicted_objects = PredictedObjects()
@@ -101,45 +91,22 @@ class MultiTopicPublisher(Node):
         pointcloud.header.frame_id = "base_link"  # 修改为 base_link
 
         pointcloud.height = 1
-        pointcloud.width = 1  # 修改为 1，为发布一个 dummy 点
+        pointcloud.width = 1  # 修改为 1，发布一个 dummy 点以避免空消息问题
         pointcloud.fields = [
             PointField(name='x', offset=0, datatype=7, count=1),
             PointField(name='y', offset=4, datatype=7, count=1),
             PointField(name='z', offset=8, datatype=7, count=1),
-            PointField(name='intensity', offset=12, datatype=7, count=1)  # 添加 intensity 字段
+            PointField(name='intensity', offset=12, datatype=7, count=1)  # 添加 intensity 字段以匹配常见结构
         ]
         pointcloud.is_bigendian = False
-        pointcloud.point_step = 16  # 4 * 4 = 16
+        pointcloud.point_step = 16  # 4 fields * 4 bytes = 16
         pointcloud.row_step = pointcloud.point_step * pointcloud.width  # 更新 row_step
-        # 添加 dummy 数据
+        # 添加 dummy 数据：x=0.0, y=0.0, z=0.0, intensity=0.0（使用 struct 打包为 bytes）
         pointcloud.data = struct.pack('<ffff', 0.0, 0.0, 0.0, 0.0)
         pointcloud.is_dense = True
 
         self.pointcloud_publisher.publish(pointcloud)
-        #self.get_logger().info("Published PointCloud2 message with dummy point.")
-
-    def publish_control_mode(self):
-        control_mode = ControlModeReport()
-        control_mode.stamp = self.get_clock().now().to_msg()  # 修改为 stamp（无 header）
-        control_mode.mode = 1  # 默认设置为 MANUAL 模式（根据最新消息定义，4 表示 MANUAL）
-
-        #self.control_mode_publisher.publish(control_mode)
-        #self.get_logger().info("Published ControlModeReport message with mode=4.")
-
-    def publish_twist(self):
-        twist_msg = TwistWithCovarianceStamped()
-        twist_msg.header.stamp = self.get_clock().now().to_msg()
-        twist_msg.header.frame_id = "base_link"  # 设置为 base_link（根据常见 Autoware 配置）
-        twist_msg.twist.twist.linear.x = 0.0  # 默认零速度
-        twist_msg.twist.twist.linear.y = 0.0
-        twist_msg.twist.twist.linear.z = 0.0
-        twist_msg.twist.twist.angular.x = 0.0
-        twist_msg.twist.twist.angular.y = 0.0
-        twist_msg.twist.twist.angular.z = 0.0
-        twist_msg.twist.covariance = [1000.0] * 36  # 设置协方差为零矩阵
-
-        #self.twist_publisher.publish(twist_msg)
-        #self.get_logger().info("Published TwistWithCovarianceStamped message with zero values.")
+        #self.get_logger().info("Published PointCloud2 message with dummy point and current timestamp.")
 
 def main(args=None):
     rclpy.init(args=args)

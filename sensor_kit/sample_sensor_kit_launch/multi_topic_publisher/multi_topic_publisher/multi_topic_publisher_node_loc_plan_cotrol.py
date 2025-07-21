@@ -8,7 +8,6 @@ from sensor_msgs.msg import PointCloud2, PointField
 from std_msgs.msg import Header  # 添加导入 Header
 import struct  # 添加 struct 用于打包点云数据
 from autoware_vehicle_msgs.msg import ControlModeReport  # 新增导入 ControlModeReport
-from geometry_msgs.msg import TwistWithCovarianceStamped  # 新增导入 TwistWithCovarianceStamped
 
 class MultiTopicPublisher(Node):
     def __init__(self):
@@ -40,11 +39,8 @@ class MultiTopicPublisher(Node):
         self.control_mode_publisher = self.create_publisher(
             ControlModeReport, '/vehicle/status/control_mode', qos_profile_reliable  # 新增控制模式发布器
         )
-        self.twist_publisher = self.create_publisher(
-            TwistWithCovarianceStamped, '/localization/twist_estimator/twist_with_covariance_lhl_simulator', qos_profile_reliable  # 新增 twist 发布器
-        )
 
-        # 定时器分别发布六个消息
+        # 定时器分别发布五个消息
         self.timer = self.create_timer(0.1, self.publish_messages)
         #self.get_logger().info("MultiTopicPublisher node has started with reliable QoS.")
 
@@ -54,7 +50,6 @@ class MultiTopicPublisher(Node):
         self.publish_traffic_signals()
         self.publish_pointcloud()
         self.publish_control_mode()  # 新增发布方法
-        self.publish_twist()  # 新增 twist 发布方法
 
     def publish_predicted_objects(self):
         predicted_objects = PredictedObjects()
@@ -123,23 +118,8 @@ class MultiTopicPublisher(Node):
         control_mode.stamp = self.get_clock().now().to_msg()  # 修改为 stamp（无 header）
         control_mode.mode = 1  # 默认设置为 MANUAL 模式（根据最新消息定义，4 表示 MANUAL）
 
-        #self.control_mode_publisher.publish(control_mode)
+        self.control_mode_publisher.publish(control_mode)
         #self.get_logger().info("Published ControlModeReport message with mode=4.")
-
-    def publish_twist(self):
-        twist_msg = TwistWithCovarianceStamped()
-        twist_msg.header.stamp = self.get_clock().now().to_msg()
-        twist_msg.header.frame_id = "base_link"  # 设置为 base_link（根据常见 Autoware 配置）
-        twist_msg.twist.twist.linear.x = 0.0  # 默认零速度
-        twist_msg.twist.twist.linear.y = 0.0
-        twist_msg.twist.twist.linear.z = 0.0
-        twist_msg.twist.twist.angular.x = 0.0
-        twist_msg.twist.twist.angular.y = 0.0
-        twist_msg.twist.twist.angular.z = 0.0
-        twist_msg.twist.covariance = [1000.0] * 36  # 设置协方差为零矩阵
-
-        #self.twist_publisher.publish(twist_msg)
-        #self.get_logger().info("Published TwistWithCovarianceStamped message with zero values.")
 
 def main(args=None):
     rclpy.init(args=args)

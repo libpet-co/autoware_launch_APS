@@ -75,7 +75,9 @@
       <arg name="raw_vehicle_cmd_converter_param_path" value="$(find-pkg-share autoware_launch)/config/vehicle/raw_vehicle_cmd_converter/raw_vehicle_cmd_converter.param.yaml"/>
     </include>
   </group>
-
+  <include file="$(find-pkg-share multi_topic_publisher)/launch/multi_topic_publisher_launch.xml">
+      <arg name="data_path" value="$(var data_path)"/>
+    </include>
   <!-- System -->
   <!-- <group if="$(var launch_system)">
     <include file="$(find-pkg-share autoware_launch)/launch/components/tier4_system_component.launch.xml"/>

@@ -7,6 +7,8 @@ Panels:
         - /System1/Vehicle1
         - /Map1/Lanelet2VectorMap1/Topic1
         - /Sensing1/LiDAR1/ConcatenatePointCloud1/Autocompute Value Bounds1
+        - /Localization1
+        - /Localization1/NDT1/MonteCarloInitialPose1
         - /Planning1/MissionPlanning1
         - /Odometry1/Shape1
         - /PointCloud21/Topic1
@@ -486,7 +488,12 @@ Visualization Manager:
               Enabled: true
               Name: MonteCarloInitialPose
               Namespaces:
-                {}
+                initial_pose_index_color_marker: true
+                initial_pose_iteration_color_marker: true
+                initial_pose_transform_probability_color_marker: true
+                result_pose_index_color_marker: true
+                result_pose_iteration_color_marker: true
+                result_pose_transform_probability_color_marker: true
               Topic:
                 Depth: 5
                 Durability Policy: Volatile
@@ -3177,8 +3184,7 @@ Visualization Manager:
               Enabled: true
               Name: VirtualWall (velocity control)
               Namespaces:
-                stop_factor_text: true
-                stop_virtual_wall: true
+                {}
               Topic:
                 Depth: 5
                 Durability Policy: Volatile
@@ -4728,26 +4734,21 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Class: rviz_default_plugins/Orbit
-      Distance: 14.277149200439453
+      Angle: 0
+      Class: rviz_default_plugins/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
-      Focal Point:
-        X: -1.4340944290161133
-        Y: 13.615029335021973
-        Z: -1.2664185762405396
-      Focal Shape Fixed Size: true
-      Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.4847966432571411
+      Scale: 25.79085350036621
       Target Frame: viewer
-      Value: Orbit (rviz_default_plugins)
-      Yaw: 4.6723952293396
+      Value: TopDownOrtho (rviz_default_plugins)
+      X: 0.28586313128471375
+      Y: 12.009557723999023
     Saved:
       - Class: rviz_default_plugins/ThirdPersonFollower
         Distance: 18
