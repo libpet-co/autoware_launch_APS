@@ -42,7 +42,7 @@ def launch_setup(context, *args, **kwargs):
         plugin="autoware::pointcloud_preprocessor::PointCloudConcatenateDataSynchronizerComponent",
         name="concatenate_data",
         remappings=[
-            ("~/input/twist", "/sensing/vehicle_velocity_converter/twist_with_covariance"),
+            ("~/input/twist", "/vehicle_velocity_converter/twist_with_covariance"),
             ("output", "concatenated/pointcloud"),
         ],
         parameters=[concatenate_and_time_sync_node_param],

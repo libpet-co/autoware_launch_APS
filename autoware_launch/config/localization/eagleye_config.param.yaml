@@ -7,7 +7,7 @@
     # Topic
     twist:
       twist_type: 1 # TwistStamped : 0, TwistWithCovarianceStamped: 1
-      twist_topic: /sensing/vehicle_velocity_converter/twist_with_covariance
+      twist_topic: /vehicle_velocity_converter/twist_with_covariance
     imu_topic: /sensors/imu/data
     gnss:
       velocity_source_type: 2 # rtklib_msgs/RtklibNav: 0, nmea_msgs/Sentence: 1, ublox_msgs/NavPVT: 2, geometry_msgs/TwistWithCovarianceStamped: 3, septentrio_gnss_driver/PVTGeodetic: 4
