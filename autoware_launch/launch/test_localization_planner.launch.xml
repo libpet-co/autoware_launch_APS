@@ -104,7 +104,7 @@
   </group>
   <include file="$(find-pkg-share multi_topic_publisher)/launch/multi_topic_publisher_launch.xml">
       <arg name="data_path" value="$(var data_path)"/>
-    </include>
+  </include>
 
   <!-- Planning -->
   <group if="$(var launch_planning)">

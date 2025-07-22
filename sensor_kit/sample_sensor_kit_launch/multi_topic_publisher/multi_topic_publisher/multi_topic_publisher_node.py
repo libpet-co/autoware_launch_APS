@@ -38,10 +38,10 @@ class MultiTopicPublisher(Node):
             PointCloud2, '/perception/obstacle_segmentation/pointcloud', qos_profile_best  # 修改为 best effort QoS
         )
         self.control_mode_publisher = self.create_publisher(
-            ControlModeReport, '/vehicle/status/control_mode', qos_profile_reliable  # 新增控制模式发布器
+            ControlModeReport, '/vehicle/status/control_modessssss', qos_profile_reliable  # 新增控制模式发布器
         )
         self.twist_publisher = self.create_publisher(
-            TwistWithCovarianceStamped, '/localization/twist_estimator/twist_with_covariance_lhl_simulator', qos_profile_reliable  # 新增 twist 发布器
+            TwistWithCovarianceStamped, '/localization/twist_estimator/twist_with_covariance_lhl_simulatorssss', qos_profile_reliable  # 新增 twist 发布器
         )
 
         # 定时器分别发布六个消息
