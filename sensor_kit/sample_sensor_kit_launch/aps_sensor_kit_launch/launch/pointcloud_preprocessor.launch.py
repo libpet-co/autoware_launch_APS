@@ -65,7 +65,7 @@ def generate_launch_description():
     def add_launch_arg(name: str, default_value=None):
         launch_arguments.append(DeclareLaunchArgument(name, default_value=default_value))
 
-    sample_sensor_kit_launch_share_dir = get_package_share_directory("sample_sensor_kit_launch")
+    sample_sensor_kit_launch_share_dir = get_package_share_directory("aps_sensor_kit_launch")
 
     add_launch_arg("base_frame", "base_link")
     add_launch_arg("use_multithread", "False")

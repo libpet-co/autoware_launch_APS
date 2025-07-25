@@ -1,0 +1,10 @@
+<launch>
+    <!-- 定义节点 -->
+    <node
+        pkg="multi_topic_publisher"
+        exec="laser_to_cloud_converter_node"
+        name="laser_to_cloud_converter"
+        output="screen"
+    >
+    </node>
+</launch>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
   <!-- Essential parameters -->
-  <arg name="map_path" description="point cloud and lanelet2 map directory path"/>
-  <arg name="vehicle_model" default="sample_vehicle" description="vehicle model name"/>
-  <arg name="sensor_model" default="sample_sensor_kit" description="sensor model name"/>
+  <arg name="map_path" default='' description="point cloud and lanelet2 map directory path"/>
+  <arg name="vehicle_model" default="aps_vehicle" description="vehicle model name"/>
+  <arg name="sensor_model" default="aps_sensor_kit" description="sensor model name"/>
   <arg name="pointcloud_container_name" default="pointcloud_container"/>
   <arg name="data_path" default="$(env HOME)/autoware_data" description="packages data and artifacts directory path"/>
 
@@ -15,19 +15,19 @@
   <!-- Modules to be launched -->
   <arg name="launch_vehicle" default="true" description="launch vehicle"/>
   <arg name="launch_system" default="false" description="launch system"/>
-  <arg name="launch_map" default="true" description="launch map"/>
-  <!-- <arg name="launch_sensing" default="true" description="launch sensing"/>
-  <arg name="launch_sensing_driver" default="true" description="launch sensing driver"/> -->
-  <arg name="launch_localization" default="true" description="launch localization"/>
+  <arg name="launch_map" default="false" description="launch map"/>
+  <arg name="launch_sensing" default="true" description="launch sensing"/>
+  <arg name="launch_sensing_driver" default="false" description="launch sensing driver"/>
+  <arg name="launch_localization" default="false" description="launch localization"/>
   <arg name="launch_perception" default="false" description="launch perception"/>
   <arg name="launch_planning" default="false" description="launch planning"/>
   <arg name="launch_control" default="false" description="launch control"/>
-  <arg name="launch_api" default="true" description="launch api"/>
+  <arg name="launch_api" default="false" description="launch api"/>
   <!-- Global parameters -->
   <arg name="use_sim_time" default="true" description="use_sim_time"/>
   <!-- Vehicle -->
   <arg name="vehicle_id" default="$(env VEHICLE_ID default)" description="vehicle specific ID"/>
-  <arg name="launch_vehicle_interface" default="true" description="launch vehicle interface"/>
+  <arg name="launch_vehicle_interface" default="false" description="launch vehicle interface"/>
   <!-- Control -->
   <arg name="check_external_emergency_heartbeat" default="false"/>
   <!-- Map -->
@@ -87,9 +87,9 @@
   </group>
 
   <!-- Sensing -->
-  <!-- <group if="$(var launch_sensing)">
+  <group if="$(var launch_sensing)">
     <include file="$(find-pkg-share autoware_launch)/launch/components/tier4_sensing_component.launch.xml"/>
-  </group> -->
+  </group>
 
   <!-- Localization -->
   <group if="$(var launch_localization)">

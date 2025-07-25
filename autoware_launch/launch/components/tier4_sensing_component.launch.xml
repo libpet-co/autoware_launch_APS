@@ -5,11 +5,11 @@
     default="false"
     description="if true, launch pointcloud container. Please note that it is not intended to launch pointcloud_container_name with the same name in other launch files."
   />
-  <arg name="pointcloud_container_name" description="name of pointcloud container"/>
-  <arg name="launch_sensing_driver" default="true"/>
-  <arg name="sensor_model" default="sample_sensor_kit"/>
-  <arg name="use_sim_time" default="false"/>
-  <arg name="vehicle_model" default="sample_vehicle"/>
+  <arg name="pointcloud_container_name" default="sensing_pointcloud_container" description="name of pointcloud container"/>
+  <arg name="launch_sensing_driver" default="false"/>
+  <arg name="sensor_model" default="aps_sensor_kit"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="vehicle_model" default="aps_vehicle"/>
 
   <!-- Global parameters -->
   <group scoped="false">
@@ -28,10 +28,21 @@
   </group>
 
   <include file="$(find-pkg-share tier4_sensing_launch)/launch/sensing.launch.xml">
+    <!-- <remap from="/sensing/lidar/top/pointcloud_raw_ex" to="/rslidar_points"/>
+    <remap from="/sensing/lidar/front/pointcloud_raw_ex" to="/rslidar_pointssss"/>
+    <remap from="/sensing/lidar/top/pointcloud_raw_ex" to="/rslidar_points"/> -->
     <arg name="launch_driver" value="$(var launch_sensing_driver)"/>
     <arg name="sensor_model" value="$(var sensor_model)"/>
     <arg name="vehicle_param_file" value="$(find-pkg-share $(var vehicle_model)_description)/config/vehicle_info.param.yaml"/>
     <arg name="vehicle_mirror_param_file" value="$(find-pkg-share $(var vehicle_model)_description)/config/mirror.param.yaml"/>
     <arg name="pointcloud_container_name" value="$(var pointcloud_container_name)"/>
   </include>
+
+  <!-- 添加 relay 节点来实现话题中继（可选，如果需要重映射） -->
+  <node pkg="topic_tools" exec="relay" name="relay_top_lidar" args="/rslidar_points /sensing/lidar/top/pointcloud_raw_ex" output="screen"/>
+  <node pkg="topic_tools" exec="relay" name="relay_front_lidar" args="/front_lidar /sensing/lidar/front/pointcloud_raw_ex " output="screen"/>
+  <node pkg="topic_tools" exec="relay" name="relay_back_lidar" args="/back_lidar /sensing/lidar/back/pointcloud_raw_ex" output="screen"/>
+
+   <include file="$(find-pkg-share multi_topic_publisher)/launch/convert_laser_to_cloud.launch.xml">
+   </include>
 </launch>

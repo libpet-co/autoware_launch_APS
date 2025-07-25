@@ -12,6 +12,7 @@ setup(
         ('share/' + package_name, ['package.xml']),
         # 添加 launch 文件的安装规则
         ('share/' + package_name + '/launch', ['launch/multi_topic_publisher_launch.xml']),
+        ('share/' + package_name + '/launch', ['launch/convert_laser_to_cloud.launch.xml']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -23,6 +24,7 @@ setup(
     entry_points={
         'console_scripts': [
             'multi_topic_publisher_node = multi_topic_publisher.multi_topic_publisher_node:main',
+            'laser_to_cloud_converter_node = multi_topic_publisher.laser_to_cloud_converter_node:main',
         ],
     },
 )
